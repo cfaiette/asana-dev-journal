@@ -1,0 +1,7 @@
+<section class="callback" role="status" aria-live="polite">
+  <h1 class="callback__title">Asana Authorization</h1>
+  <p class="callback__message" [class.callback__message--error]="status === 'error'">
+    {{ message }}
+  </p>
+  <div class="spinner" *ngIf="status === 'pending'" aria-hidden="true"></div>
+</section>

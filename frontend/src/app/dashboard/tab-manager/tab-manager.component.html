@@ -1,0 +1,24 @@
+<nav class="tab-manager" aria-label="Projects and sections" role="tablist">
+  <button
+    type="button"
+    role="tab"
+    class="tab-manager__tab"
+    [class.tab-manager__tab--active]="selectedTabId === null"
+    [attr.aria-selected]="selectedTabId === null"
+    (click)="selectTab(null)"
+  >
+    All
+  </button>
+
+  <button
+    *ngFor="let tab of tabs"
+    type="button"
+    role="tab"
+    class="tab-manager__tab"
+    [class.tab-manager__tab--active]="selectedTabId === tab.id"
+    [attr.aria-selected]="selectedTabId === tab.id"
+    (click)="selectTab(tab.id)"
+  >
+    {{ tab.label }}
+  </button>
+</nav>

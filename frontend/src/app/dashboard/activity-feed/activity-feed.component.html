@@ -1,0 +1,25 @@
+<section class="activity-feed" aria-label="Recent activity">
+  <header class="activity-feed__header">
+    <h2>Activity feed</h2>
+    <p aria-live="polite">{{ events.length }} events</p>
+  </header>
+
+  <ol *ngIf="events.length; else empty" class="activity-feed__list">
+    <li *ngFor="let event of events" class="activity-feed__item">
+      <div class="activity-feed__timestamp">
+        <time [attr.datetime]="event.occurredAt">{{ event.occurredAt | date:'short' }}</time>
+      </div>
+      <div class="activity-feed__details">
+        <h3>{{ event.type }}</h3>
+        <p>{{ event.description }}</p>
+        <p class="activity-feed__meta">
+          <span *ngIf="event.actor">By {{ event.actor }}</span>
+          <span *ngIf="event.taskId"> · Task {{ event.taskId }}</span>
+        </p>
+      </div>
+    </li>
+  </ol>
+  <ng-template #empty>
+    <p class="activity-feed__empty">No activity recorded yet.</p>
+  </ng-template>
+</section>

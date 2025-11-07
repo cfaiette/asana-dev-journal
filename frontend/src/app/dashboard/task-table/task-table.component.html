@@ -1,0 +1,116 @@
+<section class="task-table" aria-label="Task list">
+  <div class="task-table__header">
+    <h2>Tasks</h2>
+    <p class="task-table__count" aria-live="polite">{{ displayedTasks.length }} showing</p>
+  </div>
+
+  <div class="task-table__container" role="region" aria-live="polite">
+    <table>
+      <caption class="visually-hidden">Task overview with notes</caption>
+      <thead>
+        <tr>
+          <th scope="col">
+            <button type="button" (click)="toggleSort('name')">
+              Task
+              <span class="task-table__sort" [attr.data-active]="sortState.column === 'name'">
+                {{ sortState.column === 'name' ? (sortState.direction === 'asc' ? '▲' : '▼') : '⇅' }}
+              </span>
+            </button>
+          </th>
+          <th scope="col">
+            <button type="button" (click)="toggleSort('project')">
+              Project
+              <span class="task-table__sort" [attr.data-active]="sortState.column === 'project'">
+                {{ sortState.column === 'project' ? (sortState.direction === 'asc' ? '▲' : '▼') : '⇅' }}
+              </span>
+            </button>
+          </th>
+          <th scope="col">
+            <button type="button" (click)="toggleSort('section')">
+              Section
+              <span class="task-table__sort" [attr.data-active]="sortState.column === 'section'">
+                {{ sortState.column === 'section' ? (sortState.direction === 'asc' ? '▲' : '▼') : '⇅' }}
+              </span>
+            </button>
+          </th>
+          <th scope="col">
+            <button type="button" (click)="toggleSort('assignee')">
+              Assignee
+              <span class="task-table__sort" [attr.data-active]="sortState.column === 'assignee'">
+                {{ sortState.column === 'assignee' ? (sortState.direction === 'asc' ? '▲' : '▼') : '⇅' }}
+              </span>
+            </button>
+          </th>
+          <th scope="col">
+            <button type="button" (click)="toggleSort('dueDate')">
+              Due date
+              <span class="task-table__sort" [attr.data-active]="sortState.column === 'dueDate'">
+                {{ sortState.column === 'dueDate' ? (sortState.direction === 'asc' ? '▲' : '▼') : '⇅' }}
+              </span>
+            </button>
+          </th>
+          <th scope="col">
+            <button type="button" (click)="toggleSort('status')">
+              Status
+              <span class="task-table__sort" [attr.data-active]="sortState.column === 'status'">
+                {{ sortState.column === 'status' ? (sortState.direction === 'asc' ? '▲' : '▼') : '⇅' }}
+              </span>
+            </button>
+          </th>
+          <th scope="col">
+            <button type="button" (click)="toggleSort('lastUpdated')">
+              Updated
+              <span class="task-table__sort" [attr.data-active]="sortState.column === 'lastUpdated'">
+                {{ sortState.column === 'lastUpdated' ? (sortState.direction === 'asc' ? '▲' : '▼') : '⇅' }}
+              </span>
+            </button>
+          </th>
+          <th scope="col" class="task-table__notes-col">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of displayedTasks; trackBy: trackByTaskId">
+          <td data-title="Task">
+            <div class="task-table__primary">
+              <span class="task-table__name">{{ task.name }}</span>
+              <span class="task-table__meta">ID: {{ task.id }}</span>
+            </div>
+          </td>
+          <td data-title="Project">{{ task.metadata.project }}</td>
+          <td data-title="Section">{{ task.metadata.section }}</td>
+          <td data-title="Assignee">{{ task.metadata.assignee || 'Unassigned' }}</td>
+          <td data-title="Due date">{{ task.metadata.dueDate || '—' }}</td>
+          <td data-title="Status">
+            <span class="task-table__status" [attr.data-status]="task.metadata.status">
+              {{ task.metadata.status.replace('_', ' ') }}
+            </span>
+          </td>
+          <td data-title="Updated">{{ task.lastUpdated | date:'medium' }}</td>
+          <td data-title="Notes" class="task-table__notes">
+            <button
+              type="button"
+              class="task-table__note-toggle"
+              (click)="toggleNotes(task.id)"
+              [attr.aria-expanded]="isExpanded(task.id)"
+            >
+              {{ isExpanded(task.id) ? 'Hide notes' : 'View notes' }}
+            </button>
+            <section *ngIf="isExpanded(task.id)" class="task-table__note-list" aria-label="Task notes">
+              <article *ngFor="let note of task.notes" class="task-table__note">
+                <header>
+                  <h3>Note</h3>
+                  <time [attr.datetime]="note.updatedAt">{{ note.updatedAt | date:'medium' }}</time>
+                </header>
+                <p>{{ note.content }}</p>
+              </article>
+              <p *ngIf="!task.notes.length" class="task-table__empty-note">No notes recorded.</p>
+            </section>
+          </td>
+        </tr>
+        <tr *ngIf="!displayedTasks.length">
+          <td colspan="8" class="task-table__empty">No tasks match the current filters.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

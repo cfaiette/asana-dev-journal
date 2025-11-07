@@ -1,0 +1,82 @@
+<section class="filter-panel" aria-label="Task filters">
+  <div class="filter-panel__search">
+    <label for="filter-search" class="filter-panel__label">Search</label>
+    <input
+      id="filter-search"
+      type="search"
+      class="filter-panel__input"
+      placeholder="Search tasks or notes"
+      [formControl]="form.controls.search"
+    />
+  </div>
+
+  <div class="filter-panel__groups" role="group" aria-label="Filter options">
+    <fieldset>
+      <legend>Projects</legend>
+      <ng-container *ngIf="projects.length; else noProjects">
+        <label *ngFor="let project of projects" class="filter-panel__option">
+          <input
+            type="checkbox"
+            [checked]="form.controls.projects.value.includes(project)"
+            (change)="toggleSelection('projects', project)"
+            [attr.aria-pressed]="form.controls.projects.value.includes(project)"
+          />
+          <span>{{ project }}</span>
+        </label>
+      </ng-container>
+      <ng-template #noProjects>
+        <p class="filter-panel__empty">No projects available.</p>
+      </ng-template>
+    </fieldset>
+
+    <fieldset>
+      <legend>Sections</legend>
+      <ng-container *ngIf="sections.length; else noSections">
+        <label *ngFor="let section of sections" class="filter-panel__option">
+          <input
+            type="checkbox"
+            [checked]="form.controls.sections.value.includes(section)"
+            (change)="toggleSelection('sections', section)"
+          />
+          <span>{{ section }}</span>
+        </label>
+      </ng-container>
+      <ng-template #noSections>
+        <p class="filter-panel__empty">No sections available.</p>
+      </ng-template>
+    </fieldset>
+
+    <fieldset>
+      <legend>Assignees</legend>
+      <ng-container *ngIf="assignees.length; else noAssignees">
+        <label *ngFor="let person of assignees" class="filter-panel__option">
+          <input
+            type="checkbox"
+            [checked]="form.controls.assignees.value.includes(person)"
+            (change)="toggleSelection('assignees', person)"
+          />
+          <span>{{ person }}</span>
+        </label>
+      </ng-container>
+      <ng-template #noAssignees>
+        <p class="filter-panel__empty">No assignees found.</p>
+      </ng-template>
+    </fieldset>
+
+    <fieldset>
+      <legend>Status</legend>
+      <label *ngFor="let status of statuses" class="filter-panel__option">
+        <input
+          type="checkbox"
+          [checked]="form.controls.statuses.value.includes(status)"
+          (change)="toggleStatus(status)"
+        />
+        <span>{{ statusLabels[status] }}</span>
+      </label>
+    </fieldset>
+  </div>
+
+  <button type="button" class="filter-panel__clear" (click)="onClear()">
+    Clear filters
+  </button>
+</section>
