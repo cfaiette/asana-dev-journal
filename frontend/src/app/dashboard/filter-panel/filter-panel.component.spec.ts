@@ -30,7 +30,7 @@ describe('FilterPanelComponent', () => {
   });
 
   it('emits filters when search input changes', fakeAsync(() => {
-    let emitted: TaskFilters | null = null;
+    let emitted: TaskFilters = filters;
     component.filtersChange.subscribe((value) => (emitted = value));
 
     const input = fixture.debugElement.query(By.css('input[type="search"]')).nativeElement as HTMLInputElement;
@@ -38,7 +38,7 @@ describe('FilterPanelComponent', () => {
     input.dispatchEvent(new Event('input'));
     tick(250);
 
-    expect(emitted?.search).toBe('notes');
+    expect(emitted.search).toBe('notes');
   }));
 
   it('toggles checkbox selections', () => {
