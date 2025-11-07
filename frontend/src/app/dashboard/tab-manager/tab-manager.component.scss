@@ -1,0 +1,30 @@
+.tab-manager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: #e2e8f0;
+  padding: 0.75rem;
+  border-radius: 9999px;
+}
+
+.tab-manager__tab {
+  border: none;
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  background: #ffffff;
+  color: #1f2937;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.tab-manager__tab:hover,
+.tab-manager__tab:focus {
+  box-shadow: 0 0 0 2px #2563eb33;
+  outline: none;
+}
+
+.tab-manager__tab--active {
+  background: #2563eb;
+  color: #ffffff;
+}

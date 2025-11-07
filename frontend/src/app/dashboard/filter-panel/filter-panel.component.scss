@@ -1,0 +1,72 @@
+.filter-panel {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+}
+
+.filter-panel__search {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.filter-panel__label {
+  font-weight: 600;
+}
+
+.filter-panel__input {
+  border: 1px solid #cbd5f5;
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+}
+
+.filter-panel__groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+fieldset {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  min-height: 160px;
+}
+
+legend {
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+.filter-panel__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.filter-panel__empty {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.filter-panel__clear {
+  justify-self: start;
+  background: transparent;
+  border: 1px solid #64748b;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.filter-panel__clear:hover,
+.filter-panel__clear:focus {
+  border-color: #2563eb;
+  color: #2563eb;
+  outline: none;
+}
