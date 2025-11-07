@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { TaskFilters, TaskStatus } from '../../models/journal.models';
+import { debounceTime, map, Subject, takeUntil } from 'rxjs';
+import { TaskFilters, TaskStatus, defaultFilters } from '../../models/journal.models';
 
 @Component({
   selector: 'app-filter-panel',
@@ -43,7 +43,11 @@ export class FilterPanelComponent implements OnDestroy {
 
   constructor(private readonly fb: FormBuilder) {
     this.form.valueChanges
-      .pipe(debounceTime(200), takeUntil(this.destroy$))
+      .pipe(
+        debounceTime(200),
+        map(() => this.form.getRawValue()),
+        takeUntil(this.destroy$)
+      )
       .subscribe((value) => this.filtersChange.emit(value));
   }
 
@@ -72,6 +76,13 @@ export class FilterPanelComponent implements OnDestroy {
   }
 
   onClear(): void {
+    this.form.setValue({
+      search: defaultFilters.search ?? '',
+      projects: [...defaultFilters.projects],
+      sections: [...defaultFilters.sections],
+      assignees: [...defaultFilters.assignees],
+      statuses: [...defaultFilters.statuses]
+    });
     this.clearFilters.emit();
   }
 

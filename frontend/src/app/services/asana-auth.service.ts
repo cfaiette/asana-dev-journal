@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AsanaUser } from '../models/journal.models';
 import { JournalStateService } from '../state/journal-state.service';
@@ -31,6 +31,9 @@ export class AsanaAuthService {
     const params = new HttpParams().set('code', code).set('state', state ?? '');
     return this.http
       .get<OAuthResponse>(`${this.authUrl}/callback`, { params })
-      .pipe(tap((response) => this.journalState.setAuthenticatedUser(response.user)));
+      .pipe(
+        tap((response) => this.journalState.setAuthenticatedUser(response.user)),
+        map((response) => response.user)
+      );
   }
 }

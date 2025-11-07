@@ -47,7 +47,7 @@ export interface TabMapping {
 }
 
 export interface TaskFilters {
-  search?: string;
+  search: string;
   projects: string[];
   sections: string[];
   assignees: string[];
