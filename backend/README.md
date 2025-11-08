@@ -23,12 +23,21 @@ dotnet run --project DevJournal.Backend.csproj
 
 By default the WebAssembly host listens on `http://localhost:5191`.
 
-## Next steps
+## Configuration
 
-The current implementation provides scaffolding for:
+The backend reads configuration from `appsettings.json` and environment variables. Key settings include:
 
-- Asana OAuth and API client integration
-- SQLite-backed repositories for tasks, notes, and tabs
-- Minimal API endpoints for the Angular application
+| Setting | Description |
+| --- | --- |
+| `AsanaOAuth:ClientId` / `ClientSecret` | Credentials for the Asana OAuth application. |
+| `AsanaOAuth:WorkspaceId` | Workspace identifier passed when syncing assigned tasks. |
+| `Database:Path` | SQLite database file path. Use `:memory:` for ephemeral stores in tests. |
 
-Future work will flesh out the OAuth persistence layer, add migrations, and secure the API surface.
+## Capabilities
+
+The backend now provides:
+
+- A configuration-driven Asana OAuth flow that persists tokens in SQLite and returns the authenticated user profile.
+- REST endpoints under `/api/journal/*` that match the Angular client's envelope contract for tasks, activity, and tabs.
+- Automatic schema bootstrapping for tasks, notes, tabs, activity, and OAuth token tables.
+- Repository unit tests (`dotnet test backend/DevJournal.Backend.Tests`) covering notes and tab persistence.
