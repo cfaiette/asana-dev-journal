@@ -10,9 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DatabaseContext.cs" />
+    <Compile Remove="Notes/**/*.cs" />
+    <Compile Remove="Tabs/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
     <PackageReference Include="Refit" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../DevJournal.Backend.Core/DevJournal.Backend.Core.csproj" />
   </ItemGroup>
 </Project>
