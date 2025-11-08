@@ -19,7 +19,8 @@ This project implements an online developer journal tightly integrated with Asan
 |------------|------------------------------------------------------------------------------------|
 | Front-end  | Angular 17 + RxJS                                                                  |
 | Backend    | ASP.NET Core minimal APIs compiled to WebAssembly (`Microsoft.NET.Sdk.WebAssembly`) |
-| Database   | SQLite (via `Microsoft.Data.Sqlite`)                                               |
+| Edge API   | Cloudflare Workers (TypeScript) backed by Cloudflare D1 + KV                        |
+| Database   | SQLite (via `Microsoft.Data.Sqlite`) or D1 (for Workers)                             |
 
 The backend runs inside the .NET WebAssembly runtime to align with the requested architecture while still exposing familiar ASP.NET Core minimal APIs.
 
@@ -29,7 +30,8 @@ The backend runs inside the .NET WebAssembly runtime to align with the requested
 .
 ├── backend/                # .NET WebAssembly backend host
 ├── docs/                   # Architecture and integration notes
-└── frontend/               # Angular workspace generated via Angular CLI
+├── frontend/               # Angular workspace generated via Angular CLI
+└── workers/                # Cloudflare Worker that replaces the backend when deployed to the edge
 ```
 
 ## Getting started
@@ -48,7 +50,7 @@ The backend runs inside the .NET WebAssembly runtime to align with the requested
    dotnet restore
    ```
 
-3. Launch the development experience
+3. Launch the development experience (WebAssembly backend)
 
    ```bash
    # Terminal 1 - backend (served through the .NET WebAssembly host)
@@ -61,5 +63,36 @@ The backend runs inside the .NET WebAssembly runtime to align with the requested
    ```
 
 4. Browse to `http://localhost:4200` to use the journal UI.
+
+### Running against the Cloudflare Worker locally
+
+The `workers/` directory contains a TypeScript Cloudflare Worker that mirrors the REST API exposed by the WebAssembly backend. To exercise the Worker locally:
+
+1. Install the Worker dependencies:
+
+   ```bash
+   cd workers
+   npm install
+   ```
+
+2. Apply the D1 schema locally and start the Worker emulator:
+
+   ```bash
+   wrangler d1 migrations apply devjournal --local
+   wrangler dev --local
+   ```
+
+   Wrangler binds the local D1 database and KV namespace declared in `wrangler.toml` and serves the API on `http://127.0.0.1:8787`.
+
+3. In a second terminal start the Angular client with the included proxy config so that `/api` requests are forwarded to the Worker:
+
+   ```bash
+   cd frontend
+   npm start
+   ```
+
+4. Open `http://localhost:4200` and exercise the application. OAuth redirects will flow through the Worker, and API requests will be stored in the local D1 database.
+
+Refer to [`docs/cloudflare-workers.md`](docs/cloudflare-workers.md) for production deployment steps and configuration guidance.
 
 Refer to [`docs/backend-architecture.md`](docs/backend-architecture.md) for additional information about the WebAssembly-based backend design and Asana integration strategy.

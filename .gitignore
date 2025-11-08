@@ -1,0 +1,18 @@
+node_modules/
+**/node_modules/
+*.log
+.DS_Store
+dist/
+.tmp/
+.env
+.env.local
+wrangler.toml.local
+
+# Cloudflare D1 local files
+*.sqlite
+
+# Angular build artifacts
+frontend/.angular/
+
+# Wrangler dev vars
+workers/.dev.vars
