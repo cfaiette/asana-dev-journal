@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Dev\\asana-dev-journal\\backend\\DevJournal.Backend\\wwwroot\\main.js",
+      "PackagePath": "staticwebassets\\main.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DevJournal.Backend.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.DevJournal.Backend.props",
+      "PackagePath": "build\\DevJournal.Backend.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.DevJournal.Backend.props",
+      "PackagePath": "buildMultiTargeting\\DevJournal.Backend.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.DevJournal.Backend.props",
+      "PackagePath": "buildTransitive\\DevJournal.Backend.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

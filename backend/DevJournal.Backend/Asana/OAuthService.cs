@@ -38,6 +38,16 @@ public sealed class OAuthService
             return Results.BadRequest(new { error = "missing_redirect_uri" });
         }
 
+        if (string.IsNullOrWhiteSpace(_options.ClientId))
+        {
+            throw new InvalidOperationException("AsanaOAuth:ClientId is not configured. Please set it in appsettings.json or environment variables. You can get your ClientId from https://app.asana.com/0/developer-console.");
+        }
+
+        if (string.IsNullOrWhiteSpace(_options.ClientSecret))
+        {
+            throw new InvalidOperationException("AsanaOAuth:ClientSecret is not configured. Please set it in appsettings.json or environment variables.");
+        }
+
         var nonce = Guid.NewGuid().ToString("N");
         var statePayload = new OAuthState(nonce, redirectUri);
         _memoryCache.Set(StateCacheKey(nonce), statePayload, TimeSpan.FromMinutes(10));
@@ -63,7 +73,7 @@ public sealed class OAuthService
         }
 
         var decodedState = DecodeState(state);
-        if (!_memoryCache.TryGetValue(StateCacheKey(decodedState.Nonce), out OAuthState? cachedState))
+        if (!_memoryCache.TryGetValue(StateCacheKey(decodedState.Nonce), out OAuthState? cachedState) || cachedState is null)
         {
             throw new InvalidOperationException("OAuth state not found or expired.");
         }

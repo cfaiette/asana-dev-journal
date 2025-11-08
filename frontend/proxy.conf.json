@@ -1,6 +1,11 @@
 {
   "/api": {
-    "target": "http://127.0.0.1:8787",
+    "target": "http://127.0.0.1:51910",
+    "secure": false,
+    "logLevel": "info"
+  },
+  "/health": {
+    "target": "http://127.0.0.1:51910",
     "secure": false,
     "logLevel": "info"
   }

@@ -1,0 +1,13 @@
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\bin\Debug\net8.0\DevJournal.Backend.Core.deps.json
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\bin\Debug\net8.0\DevJournal.Backend.Core.dll
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\bin\Debug\net8.0\DevJournal.Backend.Core.pdb
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\DevJournal.Backend.Core.csproj.AssemblyReference.cache
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\DevJournal.Backend.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\DevJournal.Backend.Core.AssemblyInfoInputs.cache
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\DevJournal.Backend.Core.AssemblyInfo.cs
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\DevJournal.Backend.Core.csproj.CoreCompileInputs.cache
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\DevJournal.Backend.Core.sourcelink.json
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\DevJournal.Backend.Core.dll
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\refint\DevJournal.Backend.Core.dll
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\DevJournal.Backend.Core.pdb
+C:\Dev\asana-dev-journal\backend\DevJournal.Backend.Core\obj\Debug\net8.0\ref\DevJournal.Backend.Core.dll

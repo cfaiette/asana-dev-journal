@@ -33,7 +33,7 @@ public sealed class AsanaClient
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
 
-        var query = new Dictionary<string, string>
+        var query = new Dictionary<string, string?>
         {
             ["assignee"] = "me",
             ["workspace"] = string.IsNullOrWhiteSpace(_options.WorkspaceId) ? "me" : _options.WorkspaceId,
@@ -64,8 +64,8 @@ public sealed class AsanaClient
         var membership = payload.Memberships.FirstOrDefault();
         var project = membership?.Project?.Name ?? "Unassigned";
         var section = membership?.Section?.Name ?? "No Section";
-        var dueOn = payload.DueOn.HasValue ? DateTime.SpecifyKind(payload.DueOn.Value, DateTimeKind.Utc) : (DateTimeOffset?)null;
-        var lastModified = payload.ModifiedAt.HasValue ? DateTime.SpecifyKind(payload.ModifiedAt.Value, DateTimeKind.Utc) : DateTimeOffset.UtcNow;
+        var dueOn = payload.DueOn;
+        var lastModified = payload.ModifiedAt ?? DateTimeOffset.UtcNow;
         var status = payload.Completed ? "complete" : "incomplete";
 
         return new AsanaTask(

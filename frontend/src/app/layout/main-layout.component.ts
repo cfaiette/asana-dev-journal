@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { map, Subscription } from 'rxjs';
@@ -9,6 +10,7 @@ import { TaskTableComponent } from '../dashboard/task-table/task-table.component
 import { AsanaAuthService } from '../services/asana-auth.service';
 import { JournalStateService } from '../state/journal-state.service';
 import { TaskFilters } from '../models/journal.models';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-main-layout',
@@ -38,11 +40,15 @@ export class MainLayoutComponent implements OnDestroy {
 
   loading = true;
   errorMessage = '';
+  toastMessage = '';
+  toastSuccess = false;
   private subscription: Subscription;
+  private toastTimeout?: number;
 
   constructor(
     private readonly journalState: JournalStateService,
-    private readonly authService: AsanaAuthService
+    private readonly authService: AsanaAuthService,
+    private readonly http: HttpClient
   ) {
     this.subscription = this.journalState
       .loadInitialData()
@@ -59,6 +65,45 @@ export class MainLayoutComponent implements OnDestroy {
 
   connectAsana(): void {
     this.authService.startOAuth('/auth/callback');
+  }
+
+  testBackend(): void {
+    this.showToast('Testing backend connection...', true);
+    this.http.get<{ status: string }>('/health').subscribe({
+      next: (response) => {
+        const statusText = response?.status || 'ok';
+        this.showToast(`✅ Backend connected! Status: ${statusText}`, true);
+      },
+      error: (error) => {
+        console.error('Backend test error:', error);
+        let message = '❌ Cannot reach backend. Is it running?';
+        let isSuccess = false;
+        
+        if (error.status === 200) {
+          message = '✅ Backend is reachable! (Response received)';
+          isSuccess = true;
+        } else if (error.status) {
+          message = `❌ Backend error: ${error.status} ${error.statusText || error.message || ''}`;
+        } else if (error.message) {
+          message = `❌ Error: ${error.message}`;
+        }
+        
+        this.showToast(message, isSuccess);
+      }
+    });
+  }
+
+  private showToast(message: string, success: boolean): void {
+    this.toastMessage = message;
+    this.toastSuccess = success;
+    
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+    }
+    
+    this.toastTimeout = window.setTimeout(() => {
+      this.toastMessage = '';
+    }, 5000);
   }
 
   onTabChange(tabId: string | null): void {

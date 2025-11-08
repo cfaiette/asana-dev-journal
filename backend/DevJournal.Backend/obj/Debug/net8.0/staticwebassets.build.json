@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "3yFJWCQO+rFNCQ4jHHk3uIXh/pYF9OfQNHLPHxPrut8=",
+  "Source": "DevJournal.Backend",
+  "BasePath": "_content/DevJournal.Backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "DevJournal.Backend\\wwwroot",
+      "Source": "DevJournal.Backend",
+      "ContentRoot": "C:\\Dev\\asana-dev-journal\\backend\\DevJournal.Backend\\wwwroot\\",
+      "BasePath": "_content/DevJournal.Backend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Dev\\asana-dev-journal\\backend\\DevJournal.Backend\\wwwroot\\main.js",
+      "SourceId": "DevJournal.Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Dev\\asana-dev-journal\\backend\\DevJournal.Backend\\wwwroot\\",
+      "BasePath": "_content/DevJournal.Backend",
+      "RelativePath": "main.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\main.js"
+    }
+  ]
+}

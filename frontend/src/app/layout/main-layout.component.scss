@@ -39,6 +39,12 @@
   font-size: 0.9rem;
 }
 
+.layout__connect-buttons {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
 .layout__connect {
   background: #2563eb;
   color: #ffffff;
@@ -47,11 +53,24 @@
   border-radius: 9999px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.layout__connect:hover {
+  background: #1d4ed8;
 }
 
 .layout__connect:focus {
   outline: 2px solid #1d4ed8;
   outline-offset: 2px;
+}
+
+.layout__connect--test {
+  background: #10b981;
+}
+
+.layout__connect--test:hover {
+  background: #059669;
 }
 
 .layout__loading {
@@ -91,6 +110,42 @@
   border: 1px solid #f87171;
   background: #fee2e2;
   color: #991b1b;
+}
+
+.layout__toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+  max-width: 400px;
+}
+
+.layout__toast--success {
+  background: #d1fae5;
+  border: 1px solid #10b981;
+  color: #065f46;
+}
+
+.layout__toast--error {
+  background: #fee2e2;
+  border: 1px solid #f87171;
+  color: #991b1b;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .layout__main {

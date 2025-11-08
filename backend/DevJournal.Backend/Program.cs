@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using DevJournal.Backend;
 using DevJournal.Backend.Activity;
 using DevJournal.Backend.Asana;
 using DevJournal.Backend.Notes;
@@ -34,24 +36,80 @@ builder.Services.AddScoped<ActivityRepository>();
 builder.Services.AddScoped<TaskSyncService>();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
 var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
 app.MapGet("/health", () => Results.Json(new { status = "ok" }));
 
 app.MapGet("/auth/asana/start", (HttpRequest request, OAuthService oauthService) =>
 {
-    var redirectUri = request.Query["redirect_uri"].ToString();
-    return oauthService.BuildLoginRedirect(redirectUri);
+    try
+    {
+        var redirectUri = request.Query["redirect_uri"].FirstOrDefault();
+        if (string.IsNullOrWhiteSpace(redirectUri))
+        {
+            return Results.BadRequest(new { error = "redirect_uri query parameter is required" });
+        }
+        return oauthService.BuildLoginRedirect(redirectUri);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(
+            detail: ex.Message,
+            statusCode: 500,
+            title: "OAuth Error");
+    }
+});
+
+app.MapGet("/api/auth/asana/start", (HttpRequest request, OAuthService oauthService) =>
+{
+    try
+    {
+        var redirectUri = request.Query["redirect_uri"].FirstOrDefault();
+        if (string.IsNullOrWhiteSpace(redirectUri))
+        {
+            return Results.BadRequest(new { error = "redirect_uri query parameter is required" });
+        }
+        return oauthService.BuildLoginRedirect(redirectUri);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(
+            detail: ex.Message,
+            statusCode: 500,
+            title: "OAuth Error");
+    }
 });
 
 app.MapGet("/auth/asana/callback", async (HttpRequest request, OAuthService oauthService) =>
 {
-    var code = request.Query["code"].ToString();
-    var state = request.Query["state"].ToString();
+    var code = request.Query["code"].FirstOrDefault();
+    var state = request.Query["state"].FirstOrDefault();
 
     try
     {
-        var result = await oauthService.ExchangeCodeAsync(code, state);
+        var result = await oauthService.ExchangeCodeAsync(code ?? string.Empty, state ?? string.Empty);
+        return Results.Json(result, jsonOptions);
+    }
+    catch (Exception ex)
+    {
+        return Results.BadRequest(new { error = ex.Message });
+    }
+});
+
+app.MapGet("/api/auth/asana/callback", async (HttpRequest request, OAuthService oauthService) =>
+{
+    var code = request.Query["code"].FirstOrDefault();
+    var state = request.Query["state"].FirstOrDefault();
+
+    try
+    {
+        var result = await oauthService.ExchangeCodeAsync(code ?? string.Empty, state ?? string.Empty);
         return Results.Json(result, jsonOptions);
     }
     catch (Exception ex)

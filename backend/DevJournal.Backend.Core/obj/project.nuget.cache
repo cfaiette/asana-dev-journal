@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "PBz449/AWAE=",
+  "success": true,
+  "projectFilePath": "C:\\Dev\\asana-dev-journal\\backend\\DevJournal.Backend.Core\\DevJournal.Backend.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.data.sqlite\\8.0.0\\microsoft.data.sqlite.8.0.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.0\\microsoft.data.sqlite.core.8.0.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.extensions.configuration.binder\\8.0.0\\microsoft.extensions.configuration.binder.8.0.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.6\\sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\sqlitepclraw.core\\2.1.6\\sqlitepclraw.core.2.1.6.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.6\\sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.6\\sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
+  "logs": []
+}
