@@ -1,12 +1,14 @@
 {
   "/api": {
-    "target": "http://127.0.0.1:51910",
+    "target": "https://devjournal.app:51910",
     "secure": false,
-    "logLevel": "info"
+    "logLevel": "info",
+    "changeOrigin": true
   },
   "/health": {
-    "target": "http://127.0.0.1:51910",
+    "target": "https://devjournal.app:51910",
     "secure": false,
-    "logLevel": "info"
+    "logLevel": "info",
+    "changeOrigin": true
   }
 }

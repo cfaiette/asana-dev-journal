@@ -22,7 +22,8 @@ export class AsanaAuthService {
   ) {}
 
   startOAuth(redirectPath: string): void {
-    const url = new URL(`${this.authUrl}/start`, this.document.location.origin);
+    const backendUrl = environment.backendUrl || 'http://127.0.0.1:51910';
+    const url = new URL(`${backendUrl}${this.authUrl}/start`);
     url.searchParams.set('redirect_uri', `${this.document.location.origin}${redirectPath}`);
     this.document.location.href = url.toString();
   }

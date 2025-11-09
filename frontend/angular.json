@@ -60,6 +60,14 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "host": "devjournal.app",
+            "port": 4200,
+            "ssl": true,
+            "sslCert": "./devjournal.app.pem",
+            "sslKey": "./devjournal.app.key",
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "frontend:build:production"

@@ -1,0 +1,12 @@
+{
+  "name": "devjournal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd frontend && pnpm build && cd .. && pnpm build:wasm",
+    "build:frontend": "cd frontend && pnpm build",
+    "build:wasm": "node scripts/build-wasm.js",
+    "start": "cd frontend && pnpm start"
+  }
+}
+

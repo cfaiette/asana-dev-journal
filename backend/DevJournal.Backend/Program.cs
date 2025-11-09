@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using DevJournal.Backend;
 using DevJournal.Backend.Activity;
@@ -15,6 +16,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateSlimBuilder(args);
+
+// Configure HTTPS - use development certificate
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Listen(System.Net.IPAddress.Any, 51910, listenOptions =>
+    {
+        listenOptions.UseHttps();
+    });
+});
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 builder.Configuration.AddEnvironmentVariables();
 

@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# SSL Certificates
+*.pfx
+*.crt
+*.key
+*.pem
+devjournal.app.*

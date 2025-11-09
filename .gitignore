@@ -7,6 +7,7 @@ dist/
 .env
 .env.local
 wrangler.toml.local
+appsettings.json
 
 # Cloudflare D1 local files
 *.sqlite
